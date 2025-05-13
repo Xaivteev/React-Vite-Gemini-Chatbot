@@ -2,7 +2,7 @@
 
 This is my first project to learn React and Vite. The project is a simple React application that uses Vite as the build tool and Google Gemini to power an AI chatbot.
 
-The project has 2 characters that can be spoken to: 
+The project currently has 2 characters that can be spoken to: 
 
  - Ken from the Barbie movie
 
