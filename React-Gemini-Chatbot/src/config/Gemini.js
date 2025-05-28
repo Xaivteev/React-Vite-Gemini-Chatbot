@@ -4,12 +4,12 @@ import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey });
 
+// Function to send a prompt to Google Gemini and get a response
 async function runChat(prompt) {
     const response = await ai.models.generateContent({
         model: "gemini-2.0-flash",
         contents: prompt,
     });
-    console.log(response.text);
     return response.text;
 }
 

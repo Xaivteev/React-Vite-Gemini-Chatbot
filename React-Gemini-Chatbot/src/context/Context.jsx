@@ -13,7 +13,7 @@ const ContextProvider = (props) => {
 
     const [activeProfile, setActiveProfile] = useState({}); // Active profile for the AI response
 
-    const profiles = [
+    const profiles = [ // Array of profiles for different AI personalities
         {
             id: 0,
             name: "Ken",
@@ -29,9 +29,18 @@ const ContextProvider = (props) => {
             color1: "#FF7582",
             color2: "#73D154",
             promptAdjustment: "Respond to the following prompt as Spurgeon, who is a blend of a pokemon named Spurgeon and the NHL hockey player Jared Spurgeon. You must begin your response with 'Spurgeon Spurgeon' and say 'Spurgeon' throughout your response: " // My little brother mispronounced Spurgeon's name to sound more like an Eevee evolution from pokemon, so that's where this joke comes from
-        }
+        },
+        {
+            id: 2,
+            name: "Jinx",
+            image: "./Jinx.png",
+            color1: "#00DEFF",
+            color2: "#FF00FD",
+            promptAdjustment: "Respond to the following prompt as Jinx from the series Arcane. She is the unpredictable, ingenious, and chaotic, and occasionally talks to her guns, Pow-Pow and Fishbones, as though they are people :"
+        },
     ]
 
+    // Function to handle sending the input prompt to Google Gemini
     const onSent = async () => {
         setResultData("");
         setLoading(true);
@@ -44,7 +53,8 @@ const ContextProvider = (props) => {
 
         let responseArray = response.split("**");
         let boldedResponseArray = [];
-        console.log(responseArray);
+
+        // Split the response into parts based on double asterisks for bolding
         for (let i = 0; i < responseArray.length; i++) {
             if (i === 0 || i % 2 !== 1) {
                 boldedResponseArray += responseArray[i];
@@ -57,6 +67,7 @@ const ContextProvider = (props) => {
 
         let finalResponseArray = [];
 
+        // Further split the bolded response into parts based on single asterisks for italicizing
         for (let i = 0; i < italicsResponseArray.length; i++) {
             if (i === 0 || i % 2 !== 1) {
                 finalResponseArray += italicsResponseArray[i];

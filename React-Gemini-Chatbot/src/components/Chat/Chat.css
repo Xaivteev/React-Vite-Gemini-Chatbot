@@ -22,66 +22,7 @@
     -webkit-text-fill-color: transparent;
 }
 
-.chatBox {
-    display: flex;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-left: 50px;
-    border-radius: 5px;
-    border: 1px solid #4b5362;
-    background-color: #31363f;
-    color: #f3f3f3;
-    position: fixed;
-    bottom: 10px;
-    left: 10%;
-    width: 80%;
-}
-
-    .chatBox input {
-        width: 100%;
-        flex: 1;
-        background: transparent;
-        border: none;
-        outline: none;
-    }
-
-    .chatBox .icon {
-        width: 20px;
-        height: 20px;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-    .chatBox .icon:hover {
-        color: #00aaff;
-    }
-
 .result {
     text-align: left;
     margin-left: 10px;
-}
-
-    .result .resultTitle {
-        display: flex;
-    }
-
-    .result .resultData {
-        display: flex;
-    }
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.custom-spinner {
-    width: 200px;
-    height: 200px;
-    margin: 100px;
-    animation: spin 1s linear infinite;
 }

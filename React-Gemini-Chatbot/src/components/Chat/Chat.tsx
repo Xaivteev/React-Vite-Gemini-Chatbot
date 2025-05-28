@@ -1,27 +1,24 @@
-﻿import {React, useState, useContext} from 'react';
+﻿import {React, useContext} from 'react';
 import './Chat.css';
 import { Context } from '../../context/Context';
-import { FaRegPaperPlane, FaSpinner } from "react-icons/fa";
+import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
+import Chatbox from '../Chatbox/Chatbox';
+import ChatSegment from '../ChatSegment/ChatSegment';
 
 const Chat = () => {
+    // This component represents the main chat interface.
+    // It displays the active profile's image and name, and shows the chat history or a loading indicator based on the state.
+    // It also includes the chat input box for sending messages.
 
     const {
-        setInputPrompt,
         recentPrompt,
         showResult,
         loading,
         resultData,
-        onSent, activeProfile,
+        activeProfile,
+        setInputPrompt,
+        onSent
     } = useContext(Context);
-
-    const [chatboxInputValue, setChatboxInputValue] = useState('');
-
-    const handleKeyDown = (event) => {
-        if (event.key === "Enter") {
-            onSent();
-            setChatboxInputValue('');
-        }
-    }
 
     return (
         <div className="chat">
@@ -31,38 +28,16 @@ const Chat = () => {
                     ? <h1>Hello, I am <span className="text-gradient">{activeProfile.name}</span></h1>
                     : <div className="result">
                         {loading
-                            ? <div className="loader">
-                                <FaSpinner className="custom-spinner"/>
-                            </div>
+                            ? <LoadingIndicator size="200" margin="100"/>
                             : <span>
-                                <div className="resultTitle">
-                                    <p>You: <br />{recentPrompt}</p>
-                                </div>
-                                <div className="resultData">
-                                    <p>{activeProfile.name}: <br /><span dangerouslySetInnerHTML={{__html:resultData}}></span></p>
-                                </div>
+                                <ChatSegment name='You' text={recentPrompt} />
+                                <ChatSegment name={activeProfile.name} text={resultData} />
                             </span>
                         }
                     </div>
                 }
             </div>
-            <div className="responseBox">
-            </div>
-            <div className="chatBox">
-                <input type="text"
-                    className="chat-input"
-                    placeholder="Type your message here..."
-                    value={chatboxInputValue}
-                    onKeyDown={handleKeyDown}
-                    onChange={(e) => {
-                    setInputPrompt(e.target.value);
-                    setChatboxInputValue(e.target.value);
-                }} />
-                <FaRegPaperPlane className="icon" onClick={() => {
-                    onSent();
-                    setChatboxInputValue('');
-                }} />
-            </div>
+            <Chatbox setInputPrompt={setInputPrompt} onSent={onSent} />
         </div>
     );
 }
