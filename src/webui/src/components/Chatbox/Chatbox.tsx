@@ -1,18 +1,14 @@
-﻿import { useState } from 'react';
-import './Chatbox.css';
+﻿import './Chatbox.css';
 import { FaRegPaperPlane } from "react-icons/fa";
 
-const Chatbox = ({ setInputPrompt, onSent }) => {
+const Chatbox = ({ inputPrompt, setInputPrompt, onSent, loading }) => {
     // This component represents the chat input box where users can type their messages.
     // It includes an input field for the message and a send button (paper plane icon).
-    // When the user presses Enter or clicks the send button, it triggers the onSent function and clears the input field.
-
-    const [chatboxInputValue, setChatboxInputValue] = useState('');
+    // When the user presses Enter or clicks the send button, it triggers the onSent function.
 
     const handleSend = () => {
-        if (!chatboxInputValue.trim()) return;
+        if (!inputPrompt.trim() || loading) return;
         onSent();
-        setChatboxInputValue('');
     }
 
     const handleKeyDown = (event) => {
@@ -26,13 +22,12 @@ const Chatbox = ({ setInputPrompt, onSent }) => {
             <input type="text"
                 className="chat-input"
                 placeholder="Type your message here..."
-                value={chatboxInputValue}
+                value={inputPrompt}
+                disabled={loading}
                 onKeyDown={handleKeyDown}
-                onChange={(e) => {
-                setInputPrompt(e.target.value);
-                setChatboxInputValue(e.target.value);
-            }} />
-            <button type="button" className="send-button" aria-label="Send" onClick={handleSend}>
+                onChange={(e) => setInputPrompt(e.target.value)}
+            />
+            <button type="button" className="send-button" aria-label="Send" disabled={loading} onClick={handleSend}>
                 <FaRegPaperPlane className="icon" />
             </button>
         </div>

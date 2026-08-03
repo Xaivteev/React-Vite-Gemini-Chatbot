@@ -38,6 +38,11 @@
         height: 20px;
     }
 
-    .chatBox .send-button:hover {
+    .chatBox .send-button:hover:not(:disabled) {
         color: #00aaff;
+    }
+
+    .chatBox .send-button:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
     }

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useRef, useState } from "react";
 import runChat from "../config/Gemini";
 
 export const Context = createContext();
@@ -10,6 +10,7 @@ const ContextProvider = (props) => {
     const [showResult, setShowResult] = useState(false); // Flag to show/hide result
     const [loading, setLoading] = useState(false); // Loading state for the AI response
     const [resultData, setResultData] = useState(''); // AI response data
+    const loadingRef = useRef(false);
 
     const [activeProfile, setActiveProfile] = useState({}); // Active profile for the AI response
 
@@ -42,15 +43,17 @@ const ContextProvider = (props) => {
 
     // Function to handle sending the input prompt to Google Gemini
     const onSent = async () => {
-        if (!inputPrompt.trim()) return;
+        if (!inputPrompt.trim() || loadingRef.current) return;
 
+        const prompt = inputPrompt;
+        loadingRef.current = true;
         setResultData("");
         setLoading(true);
         setShowResult(true);
-        setRecentPrompt(inputPrompt);
+        setRecentPrompt(prompt);
 
         try {
-            const adjustedPrompt = activeProfile.promptAdjustment + inputPrompt;
+            const adjustedPrompt = activeProfile.promptAdjustment + prompt;
 
             const response = await runChat(adjustedPrompt);
 
@@ -82,6 +85,7 @@ const ContextProvider = (props) => {
             setResultData(finalResponseArray);
             setInputPrompt("");
         } finally {
+            loadingRef.current = false;
             setLoading(false);
         }
     }

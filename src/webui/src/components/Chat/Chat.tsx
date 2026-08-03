@@ -11,6 +11,7 @@ const Chat = () => {
     // It also includes the chat input box for sending messages.
 
     const {
+        inputPrompt,
         recentPrompt,
         showResult,
         loading,
@@ -37,7 +38,7 @@ const Chat = () => {
                     </div>
                 }
             </div>
-            <Chatbox setInputPrompt={setInputPrompt} onSent={onSent} />
+            <Chatbox inputPrompt={inputPrompt} setInputPrompt={setInputPrompt} onSent={onSent} loading={loading} />
         </div>
     );
 }
