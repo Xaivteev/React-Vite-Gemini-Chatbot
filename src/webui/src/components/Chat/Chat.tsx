@@ -30,10 +30,10 @@ const Chat = () => {
                     : <div className="result">
                         {loading
                             ? <LoadingIndicator size="200" margin="100"/>
-                            : <span>
+                            : <>
                                 <ChatSegment name='You' text={recentPrompt} />
                                 <ChatSegment name={activeProfile.name} text={resultData} />
-                            </span>
+                            </>
                         }
                     </div>
                 }
