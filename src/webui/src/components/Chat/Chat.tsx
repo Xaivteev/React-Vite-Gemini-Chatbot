@@ -25,7 +25,7 @@ const Chat = () => {
             <div className="activeProfile">
                 <img src={activeProfile.image} alt={activeProfile.name} className="headerImage" />
                 {!showResult
-                    ? <h1>Hello, I am <span className="text-gradient">{activeProfile.name}</span></h1>
+                    ? <h1>Hello, I am <span className="text-gradient" style={{ '--color1': activeProfile.color1, '--color2': activeProfile.color2 }}>{activeProfile.name}</span></h1>
                     : <div className="result">
                         {loading
                             ? <LoadingIndicator size="200" margin="100"/>
