@@ -1,4 +1,4 @@
-﻿import { useEffect, useContext } from 'react'
+﻿import { useContext } from 'react'
 
 import { Context } from '../../context/Context';
 import './Sidebar.css';
@@ -18,10 +18,10 @@ const Sidebar = () => {
 function ProfileList({ activeProfile, setActiveProfile, profiles, setShowResult, loading }) {
     // Function to display a list of profile images
 
-    // Whenever the active profile changes
-    useEffect(() => {
+    const selectProfile = (profile) => {
+        setActiveProfile(profile);
         setShowResult(false);
-    }, [activeProfile]);
+    };
 
     return (
         <div className="profile-list">
@@ -36,7 +36,7 @@ function ProfileList({ activeProfile, setActiveProfile, profiles, setShowResult,
                             aria-label={`Select ${profile.name}`}
                             aria-pressed={isActive}
                             disabled={loading}
-                            onClick={() => setActiveProfile(profile)}
+                            onClick={() => selectProfile(profile)}
                         >
                             <img src={profile.image} alt={profile.name} className="profileImage" />
                         </button>
