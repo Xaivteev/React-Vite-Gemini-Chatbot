@@ -32,7 +32,9 @@ const Chatbox = ({ setInputPrompt, onSent }) => {
                 setInputPrompt(e.target.value);
                 setChatboxInputValue(e.target.value);
             }} />
-            <FaRegPaperPlane className="icon" onClick={handleSend} />
+            <button type="button" className="send-button" aria-label="Send" onClick={handleSend}>
+                <FaRegPaperPlane className="icon" />
+            </button>
         </div>
     );
 }
