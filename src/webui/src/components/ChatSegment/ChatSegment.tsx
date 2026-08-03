@@ -1,7 +1,7 @@
 ﻿import './ChatSegment.css';
 import DOMPurify from 'dompurify';
 
-const Chat = ({ name, text }) => {
+const ChatSegment = ({ name, text }) => {
     const cleanText = DOMPurify.sanitize(text);
 
     return (
@@ -11,4 +11,4 @@ const Chat = ({ name, text }) => {
     );
 }
 
-export default Chat;
+export default ChatSegment;
