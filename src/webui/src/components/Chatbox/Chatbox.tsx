@@ -9,10 +9,15 @@ const Chatbox = ({ setInputPrompt, onSent }) => {
 
     const [chatboxInputValue, setChatboxInputValue] = useState('');
 
+    const handleSend = () => {
+        if (!chatboxInputValue.trim()) return;
+        onSent();
+        setChatboxInputValue('');
+    }
+
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
-            onSent();
-            setChatboxInputValue('');
+            handleSend();
         }
     }
 
@@ -27,10 +32,7 @@ const Chatbox = ({ setInputPrompt, onSent }) => {
                 setInputPrompt(e.target.value);
                 setChatboxInputValue(e.target.value);
             }} />
-            <FaRegPaperPlane className="icon" onClick={() => {
-                onSent();
-                setChatboxInputValue('');
-            }} />
+            <FaRegPaperPlane className="icon" onClick={handleSend} />
         </div>
     );
 }

@@ -42,43 +42,48 @@ const ContextProvider = (props) => {
 
     // Function to handle sending the input prompt to Google Gemini
     const onSent = async () => {
+        if (!inputPrompt.trim()) return;
+
         setResultData("");
         setLoading(true);
         setShowResult(true);
         setRecentPrompt(inputPrompt);
 
-        const adjustedPrompt = activeProfile.promptAdjustment + inputPrompt;
+        try {
+            const adjustedPrompt = activeProfile.promptAdjustment + inputPrompt;
 
-        const response = await runChat(adjustedPrompt);
+            const response = await runChat(adjustedPrompt);
 
-        let responseArray = response.split("**");
-        let boldedResponseArray = [];
+            let responseArray = response.split("**");
+            let boldedResponseArray = [];
 
-        // Split the response into parts based on double asterisks for bolding
-        for (let i = 0; i < responseArray.length; i++) {
-            if (i === 0 || i % 2 !== 1) {
-                boldedResponseArray += responseArray[i];
-            } else {
-                boldedResponseArray += "<b>" + responseArray[i] + "</b>";
+            // Split the response into parts based on double asterisks for bolding
+            for (let i = 0; i < responseArray.length; i++) {
+                if (i === 0 || i % 2 !== 1) {
+                    boldedResponseArray += responseArray[i];
+                } else {
+                    boldedResponseArray += "<b>" + responseArray[i] + "</b>";
+                }
             }
-        }
 
-        let italicsResponseArray = boldedResponseArray.split("*");
+            let italicsResponseArray = boldedResponseArray.split("*");
 
-        let finalResponseArray = [];
+            let finalResponseArray = [];
 
-        // Further split the bolded response into parts based on single asterisks for italicizing
-        for (let i = 0; i < italicsResponseArray.length; i++) {
-            if (i === 0 || i % 2 !== 1) {
-                finalResponseArray += italicsResponseArray[i];
-            } else {
-                finalResponseArray += "<i>" + italicsResponseArray[i] + "</i>";
+            // Further split the bolded response into parts based on single asterisks for italicizing
+            for (let i = 0; i < italicsResponseArray.length; i++) {
+                if (i === 0 || i % 2 !== 1) {
+                    finalResponseArray += italicsResponseArray[i];
+                } else {
+                    finalResponseArray += "<i>" + italicsResponseArray[i] + "</i>";
+                }
             }
-        }
 
-        setResultData(finalResponseArray);
-        setLoading(false);
-        setInputPrompt("");
+            setResultData(finalResponseArray);
+            setInputPrompt("");
+        } finally {
+            setLoading(false);
+        }
     }
 
     const contextValue = {
