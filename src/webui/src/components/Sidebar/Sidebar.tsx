@@ -6,16 +6,16 @@ import './Sidebar.css';
 const Sidebar = () => {
     // Sidebar component to display profile images and other content
 
-    const { profiles, activeProfile, setActiveProfile, setShowResult  } = useContext(Context);
+    const { profiles, activeProfile, setActiveProfile, setShowResult, loading } = useContext(Context);
 
     return (
         <div className="sidebar">
-            <ProfileList activeProfile={activeProfile} setActiveProfile={setActiveProfile} profiles={profiles} setShowResult={setShowResult} />
+            <ProfileList activeProfile={activeProfile} setActiveProfile={setActiveProfile} profiles={profiles} setShowResult={setShowResult} loading={loading} />
         </div>
     );
 }
 
-function ProfileList({ activeProfile, setActiveProfile, profiles, setShowResult }) {
+function ProfileList({ activeProfile, setActiveProfile, profiles, setShowResult, loading }) {
     // Function to display a list of profile images
 
     // Whenever the active profile changes
@@ -35,6 +35,7 @@ function ProfileList({ activeProfile, setActiveProfile, profiles, setShowResult 
                             className="profile-button"
                             aria-label={`Select ${profile.name}`}
                             aria-pressed={isActive}
+                            disabled={loading}
                             onClick={() => setActiveProfile(profile)}
                         >
                             <img src={profile.image} alt={profile.name} className="profileImage" />
