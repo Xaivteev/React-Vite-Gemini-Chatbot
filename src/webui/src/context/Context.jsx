@@ -82,7 +82,7 @@ const ContextProvider = (props) => {
                 }
             }
 
-            setResultData(finalResponseArray);
+            setResultData(finalResponseArray.replace(/\n/g, "<br>"));
             setInputPrompt("");
         } catch {
             setResultData("Something went wrong. Please try again.");
