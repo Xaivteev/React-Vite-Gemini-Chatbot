@@ -84,6 +84,8 @@ const ContextProvider = (props) => {
 
             setResultData(finalResponseArray);
             setInputPrompt("");
+        } catch {
+            setResultData("Something went wrong. Please try again.");
         } finally {
             loadingRef.current = false;
             setLoading(false);
