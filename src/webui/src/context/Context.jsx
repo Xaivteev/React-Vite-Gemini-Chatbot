@@ -3,6 +3,33 @@ import runChat from "../config/Gemini";
 
 export const Context = createContext();
 
+const profiles = [ // Array of profiles for different AI personalities
+    {
+        id: 0,
+        name: "Ken",
+        image: "./ken mugshot.jpg",
+        color1: "#F504F7",
+        color2: "#0087FA",
+        promptAdjustment: "Respond to the following prompt as Ken from the Barbie movie, who is highly charismatic, forthright, brash and slightly dim-witted, often serving as the butt of some jokes: "
+    },
+    {
+        id: 1,
+        name: "Spurgeon",
+        image: "./spurgeon in the wild.png",
+        color1: "#FF7582",
+        color2: "#73D154",
+        promptAdjustment: "Respond to the following prompt as Spurgeon, who is a blend of a pokemon named Spurgeon and the NHL hockey player Jared Spurgeon. You must begin your response with 'Spurgeon Spurgeon' and say 'Spurgeon' throughout your response: " // My little brother mispronounced Spurgeon's name to sound more like an Eevee evolution from pokemon, so that's where this joke comes from
+    },
+    {
+        id: 2,
+        name: "Jinx",
+        image: "./Jinx.png",
+        color1: "#00DEFF",
+        color2: "#FF00FD",
+        promptAdjustment: "Respond to the following prompt as Jinx from the series Arcane. She is the unpredictable, ingenious, and chaotic, and occasionally talks to her guns, Pow-Pow and Fishbones, as though they are people :"
+    },
+]
+
 const ContextProvider = (props) => {
 
     const [inputPrompt, setInputPrompt] = useState(''); // Input text from user
@@ -12,34 +39,7 @@ const ContextProvider = (props) => {
     const [resultData, setResultData] = useState(''); // AI response data
     const loadingRef = useRef(false);
 
-    const [activeProfile, setActiveProfile] = useState({}); // Active profile for the AI response
-
-    const profiles = [ // Array of profiles for different AI personalities
-        {
-            id: 0,
-            name: "Ken",
-            image: "./ken mugshot.jpg",
-            color1: "#F504F7",
-            color2: "#0087FA",
-            promptAdjustment: "Respond to the following prompt as Ken from the Barbie movie, who is highly charismatic, forthright, brash and slightly dim-witted, often serving as the butt of some jokes: "
-        },
-        {
-            id: 1,
-            name: "Spurgeon",
-            image: "./spurgeon in the wild.png",
-            color1: "#FF7582",
-            color2: "#73D154",
-            promptAdjustment: "Respond to the following prompt as Spurgeon, who is a blend of a pokemon named Spurgeon and the NHL hockey player Jared Spurgeon. You must begin your response with 'Spurgeon Spurgeon' and say 'Spurgeon' throughout your response: " // My little brother mispronounced Spurgeon's name to sound more like an Eevee evolution from pokemon, so that's where this joke comes from
-        },
-        {
-            id: 2,
-            name: "Jinx",
-            image: "./Jinx.png",
-            color1: "#00DEFF",
-            color2: "#FF00FD",
-            promptAdjustment: "Respond to the following prompt as Jinx from the series Arcane. She is the unpredictable, ingenious, and chaotic, and occasionally talks to her guns, Pow-Pow and Fishbones, as though they are people :"
-        },
-    ]
+    const [activeProfile, setActiveProfile] = useState(profiles[0]); // Active profile for the AI response
 
     // Function to handle sending the input prompt to Google Gemini
     const onSent = async () => {

@@ -18,11 +18,6 @@ const Sidebar = () => {
 function ProfileList({ activeProfile, setActiveProfile, profiles, setShowResult }) {
     // Function to display a list of profile images
 
-    // Set the initial active profile to the first one in the list
-    useEffect(() => {
-        setActiveProfile(profiles[0]);
-    }, []);
-
     // Whenever the active profile changes
     useEffect(() => {
         setShowResult(false);
@@ -30,11 +25,23 @@ function ProfileList({ activeProfile, setActiveProfile, profiles, setShowResult 
 
     return (
         <div className="profile-list">
-            {profiles.map((profile, index) => (
-                <div className="profile" key={profile.id}>
-                    <img key={index} src={profile.image} alt={profile.name} className="profileImage" onClick={() => setActiveProfile(profiles[index])} />
-                </div>
-            ))}
+            {profiles.map((profile) => {
+                const isActive = activeProfile.id === profile.id;
+
+                return (
+                    <div className="profile" key={profile.id}>
+                        <button
+                            type="button"
+                            className="profile-button"
+                            aria-label={`Select ${profile.name}`}
+                            aria-pressed={isActive}
+                            onClick={() => setActiveProfile(profile)}
+                        >
+                            <img src={profile.image} alt={profile.name} className="profileImage" />
+                        </button>
+                    </div>
+                );
+            })}
         </div>
     );
 }
