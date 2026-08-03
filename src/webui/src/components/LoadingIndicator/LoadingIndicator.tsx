@@ -1,5 +1,4 @@
-﻿import { React } from 'react';
-import './LoadingIndicator.css';
+﻿import './LoadingIndicator.css';
 import { FaSpinner } from "react-icons/fa";
 
 const LoadingIndicator = ({ size, margin }) => {

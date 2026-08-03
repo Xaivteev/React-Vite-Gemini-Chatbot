@@ -1,4 +1,4 @@
-﻿import {React, useState} from 'react';
+﻿import { useState } from 'react';
 import './Chatbox.css';
 import { FaRegPaperPlane } from "react-icons/fa";
 

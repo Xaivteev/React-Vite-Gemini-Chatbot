@@ -1,4 +1,4 @@
-﻿import { React, useState, useEffect, useContext } from 'react'
+﻿import { useEffect, useContext } from 'react'
 
 import { Context } from '../../context/Context';
 import './Sidebar.css';
@@ -26,7 +26,6 @@ function ProfileList({ activeProfile, setActiveProfile, profiles, setShowResult 
     // Whenever the active profile changes
     useEffect(() => {
         setShowResult(false);
-        console.log(activeProfile);
     }, [activeProfile]);
 
     return (

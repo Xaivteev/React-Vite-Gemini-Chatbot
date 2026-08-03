@@ -1,5 +1,4 @@
-﻿import { React } from 'react';
-import './ChatSegment.css';
+﻿import './ChatSegment.css';
 import DOMPurify from 'dompurify';
 
 const Chat = ({ name, text }) => {

@@ -1,4 +1,4 @@
-﻿import {React, useContext} from 'react';
+﻿import { useContext } from 'react';
 import './Chat.css';
 import { Context } from '../../context/Context';
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
